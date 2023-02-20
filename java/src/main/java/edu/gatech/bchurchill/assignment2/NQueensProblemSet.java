@@ -1,13 +1,15 @@
 package edu.gatech.bchurchill.assignment2;
 
+import dist.DiscreteDependencyTree;
 import dist.DiscretePermutationDistribution;
 import dist.Distribution;
 import opt.*;
-import opt.ga.NQueensFitnessFunction;
-import shared.FixedIterationTrainer;
-import shared.Instance;
+import opt.ga.*;
+import opt.prob.GenericProbabilisticOptimizationProblem;
+import opt.prob.MIMIC;
+import opt.prob.ProbabilisticOptimizationProblem;
 
-public class NQueensProblemSet implements OptimizationProblemSet {
+public class NQueensProblemSet extends BaseProblemSet {
 
     private int numberQueens;
     private EvaluationFunction fitnessFunction;
@@ -23,34 +25,43 @@ public class NQueensProblemSet implements OptimizationProblemSet {
     }
 
     @Override
-    public void randomizedHillClimbing() {
+    public SolutionStatistics randomizedHillClimbing() {
         NeighborFunction neighborFunction = new SwapNeighbor();
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
         HillClimbingProblem problem = new GenericHillClimbingProblem(fitnessFunction, distribution, neighborFunction);
         OptimizationAlgorithm algorithm = new RandomizedHillClimbing(problem);
 
-        long startTime = System.currentTimeMillis();
-        FixedIterationTrainer fit = new FixedIterationTrainer(algorithm, 100);
-        fit.train();
-        System.out.println("\tTime : "+ (System.currentTimeMillis() - startTime) + "ms");
-
-        Instance solution = algorithm.getOptimal();
-        System.out.println("\tsolution: " + solution.getData());
-        System.out.println("\tscore: " + fitnessFunction.value(solution));
+        return solve(algorithm, fitnessFunction);
     }
 
     @Override
-    public void simulatedAnnealing() {
+    public SolutionStatistics simulatedAnnealing() {
+        NeighborFunction neighborFunction = new SwapNeighbor();
+        Distribution distribution = new DiscretePermutationDistribution(numberQueens);
+        HillClimbingProblem problem = new GenericHillClimbingProblem(fitnessFunction, distribution, neighborFunction);
+        OptimizationAlgorithm algorithm = new SimulatedAnnealing(1E1, .1, problem);
 
+        return solve(algorithm, fitnessFunction);
     }
 
     @Override
-    public void geneticAlgorithm() {
+    public SolutionStatistics geneticAlgorithm() {
+        Distribution distribution = new DiscretePermutationDistribution(numberQueens);
+        MutationFunction mf = new SwapMutation();
+        CrossoverFunction cf = new SingleCrossOver();
+        GeneticAlgorithmProblem problem = new GenericGeneticAlgorithmProblem(fitnessFunction, distribution, mf, cf);
+        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(200, 0, 10, problem);
 
+        return solve(algorithm, fitnessFunction);
     }
 
     @Override
-    public void mimic() {
+    public SolutionStatistics mimic() {
+        Distribution distribution = new DiscretePermutationDistribution(numberQueens);
+        Distribution dependencyTreeDistribution = new DiscreteDependencyTree(.1);
+        ProbabilisticOptimizationProblem problem = new GenericProbabilisticOptimizationProblem(fitnessFunction, distribution, dependencyTreeDistribution);
+        MIMIC algorithm = new MIMIC(200, 10, problem);
 
+        return solve(algorithm, fitnessFunction);
     }
 }

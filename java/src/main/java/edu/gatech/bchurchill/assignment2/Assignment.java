@@ -9,7 +9,14 @@ public class Assignment {
 
         for(var problem: problems) {
             System.out.println("Problem: " + problem.getName());
-            problem.randomizedHillClimbing();
+            System.out.println("\tRandomized Hill Climbing");
+            System.out.println("\t\t"+problem.randomizedHillClimbing());
+            System.out.println("\tSimulated Annealing");
+            System.out.println("\t\t"+problem.simulatedAnnealing());
+            System.out.println("\tGenetic Algorithm");
+            System.out.println("\t\t"+problem.geneticAlgorithm());
+            System.out.println("\tMIMIC");
+            System.out.println("\t\t"+problem.mimic());
         }
     }
 
