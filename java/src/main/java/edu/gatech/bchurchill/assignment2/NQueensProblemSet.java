@@ -47,9 +47,9 @@ public class NQueensProblemSet extends BaseProblemSet {
     @Override
     public SolutionStatistics geneticAlgorithm() {
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
-        MutationFunction mf = new SwapMutation();
-        CrossoverFunction cf = new SingleCrossOver();
-        GeneticAlgorithmProblem problem = new GenericGeneticAlgorithmProblem(fitnessFunction, distribution, mf, cf);
+        MutationFunction mutationFunction = new SwapMutation();
+        CrossoverFunction crossoverFunction = new SingleCrossOver();
+        GeneticAlgorithmProblem problem = new GenericGeneticAlgorithmProblem(fitnessFunction, distribution, mutationFunction, crossoverFunction);
         StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(200, 0, 10, problem);
 
         return solve(algorithm, fitnessFunction);
