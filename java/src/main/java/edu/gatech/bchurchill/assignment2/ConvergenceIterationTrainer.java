@@ -17,25 +17,25 @@ public class ConvergenceIterationTrainer implements Trainer {
 
     @Override
     public double train() {
-        double error = Double.MAX_VALUE;
-        int duplicateErrorCount = 0;
+        double score = Double.MAX_VALUE;
+        int duplicateScoreCount = 0;
+        double previousScore;
 
-        double lastError;
         do {
             ++this.iterations;
-            lastError = error;
-            error = this.trainer.train();
+            previousScore = score;
+            score = this.trainer.train();
 
-            if(lastError == error) {
-                duplicateErrorCount++;
+            if(previousScore == score) {
+                duplicateScoreCount++;
             } else {
-                duplicateErrorCount = 0;
+                duplicateScoreCount = 0;
             }
 
-        } while(duplicateErrorCount < this.threshold
+        } while(duplicateScoreCount < this.threshold
                 && this.iterations < this.maxIterations);
 
-        return error;
+        return score;
     }
 
     public int getIterations() {
