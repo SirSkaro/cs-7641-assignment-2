@@ -7,7 +7,8 @@ public class Assignment {
     public static void main(String[] args) {
         List<OptimizationProblemSet> problems = List.of(
             new NQueensProblemSet(8),
-            new KnapsackProblemSet(8)
+            new KnapsackProblemSet(8),
+            new SixPeaksProblemSet(10)
         );
 
         for(var problem: problems) {
