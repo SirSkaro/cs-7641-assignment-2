@@ -1,7 +1,6 @@
 package edu.gatech.bchurchill.assignment2;
 
 import dist.DiscreteDependencyTree;
-import dist.DiscretePermutationDistribution;
 import dist.DiscreteUniformDistribution;
 import dist.Distribution;
 import opt.*;
@@ -10,7 +9,6 @@ import opt.ga.*;
 import opt.prob.GenericProbabilisticOptimizationProblem;
 import opt.prob.MIMIC;
 import opt.prob.ProbabilisticOptimizationProblem;
-import shared.FixedIterationTrainer;
 
 import java.util.Arrays;
 import java.util.Random;

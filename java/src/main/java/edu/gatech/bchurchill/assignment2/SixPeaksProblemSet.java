@@ -14,12 +14,10 @@ import java.util.Arrays;
 
 public class SixPeaksProblemSet extends BaseProblemSet {
 
-    private int N;
     private EvaluationFunction fitnessFunction;
     private int[] ranges;
 
     public SixPeaksProblemSet(int N) {
-        this.N = N;
         int T = N / 5;
         this.fitnessFunction = new SixPeaksEvaluationFunction(T);
 

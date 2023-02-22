@@ -6,10 +6,12 @@ public class SolutionStatistics {
     public Instance finalPoint;
     public long trainTimeInMs;
     public double score;
+    public int iterations;
 
-    public SolutionStatistics(Instance finalPoint, long trainTime, double score) {
+    public SolutionStatistics(Instance finalPoint, long trainTime, int iterations, double score) {
         this.finalPoint = finalPoint;
         this.trainTimeInMs = trainTime;
+        this.iterations = iterations;
         this.score = score;
     }
 
@@ -18,6 +20,7 @@ public class SolutionStatistics {
         return "{" +
                 "finalPoint=" + finalPoint.getData() +
                 ", train time (ms)=" + trainTimeInMs +
+                ", iterations=" + iterations +
                 ", score=" + score +
                 '}';
     }
