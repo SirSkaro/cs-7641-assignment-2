@@ -8,7 +8,8 @@ public class Assignment {
         List<OptimizationProblemSet> problems = List.of(
             new NQueensProblemSet(8),
             new KnapsackProblemSet(8),
-            new SixPeaksProblemSet(10)
+            new SixPeaksProblemSet(10),
+            new TravelingSalesmanProblemSet(8)
         );
 
         for(var problem: problems) {
