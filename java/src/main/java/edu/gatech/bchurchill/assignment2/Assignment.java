@@ -1,5 +1,7 @@
 package edu.gatech.bchurchill.assignment2;
 
+import edu.gatech.bchurchill.assignment2.part1.*;
+
 import java.util.List;
 
 public class Assignment {

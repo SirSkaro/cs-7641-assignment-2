@@ -1,4 +1,4 @@
-package edu.gatech.bchurchill.assignment2;
+package edu.gatech.bchurchill.assignment2.part1;
 
 import opt.EvaluationFunction;
 import opt.OptimizationAlgorithm;
