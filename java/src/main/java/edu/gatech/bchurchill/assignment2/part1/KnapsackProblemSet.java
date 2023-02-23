@@ -3,6 +3,7 @@ package edu.gatech.bchurchill.assignment2.part1;
 import dist.DiscreteDependencyTree;
 import dist.DiscreteUniformDistribution;
 import dist.Distribution;
+import edu.gatech.bchurchill.assignment2.Assignment;
 import opt.*;
 import opt.example.KnapsackEvaluationFunction;
 import opt.ga.*;
@@ -13,7 +14,7 @@ import opt.prob.ProbabilisticOptimizationProblem;
 import java.util.Arrays;
 import java.util.Random;
 
-public class KnapsackProblemSet extends BaseProblemSet {
+public class KnapsackProblemSet extends Assignment.BaseProblemSet {
     private static final int COPIES_EACH = 4;
     private static final double MAX_VALUE_PER_ELEMENT = 50;
     private static final double MAX_WEIGHT_PER_ELEMENT = 50;
