@@ -4,13 +4,14 @@ import dist.DiscreteDependencyTree;
 import dist.DiscretePermutationDistribution;
 import dist.Distribution;
 import edu.gatech.bchurchill.assignment2.Assignment;
+import edu.gatech.bchurchill.assignment2.BaseProblemSet;
 import opt.*;
 import opt.ga.*;
 import opt.prob.GenericProbabilisticOptimizationProblem;
 import opt.prob.MIMIC;
 import opt.prob.ProbabilisticOptimizationProblem;
 
-public class NQueensProblemSet extends Assignment.BaseProblemSet {
+public class NQueensProblemSet extends BaseProblemSet {
 
     private int numberQueens;
     private EvaluationFunction fitnessFunction;

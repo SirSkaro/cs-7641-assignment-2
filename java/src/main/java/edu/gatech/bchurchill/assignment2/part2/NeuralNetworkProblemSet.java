@@ -1,15 +1,16 @@
 package edu.gatech.bchurchill.assignment2.part2;
 
 import edu.gatech.bchurchill.assignment2.Assignment;
+import edu.gatech.bchurchill.assignment2.BaseProblemSet;
 import edu.gatech.bchurchill.assignment2.part1.SolutionStatistics;
 import func.nn.OptNetworkBuilder;
 import func.nn.feedfwd.FeedForwardNetwork;
 
-public class NeuralNetworkProblemSet extends Assignment.BaseProblemSet {
+public class NeuralNetworkProblemSet extends BaseProblemSet {
     int outputLayerSize = 26;
 
     public NeuralNetworkProblemSet() {
-
+        // TODO reference the examples in comments
     }
 
     @Override

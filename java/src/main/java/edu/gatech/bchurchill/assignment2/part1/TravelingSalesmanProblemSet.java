@@ -4,6 +4,7 @@ import dist.DiscreteDependencyTree;
 import dist.DiscretePermutationDistribution;
 import dist.Distribution;
 import edu.gatech.bchurchill.assignment2.Assignment;
+import edu.gatech.bchurchill.assignment2.BaseProblemSet;
 import opt.*;
 import opt.example.TravelingSalesmanCrossOver;
 import opt.example.TravelingSalesmanEvaluationFunction;
@@ -15,7 +16,7 @@ import opt.prob.ProbabilisticOptimizationProblem;
 
 import java.util.Random;
 
-public class TravelingSalesmanProblemSet extends Assignment.BaseProblemSet {
+public class TravelingSalesmanProblemSet extends BaseProblemSet {
 
     private int cityCount;
     private EvaluationFunction fitnessFunction;

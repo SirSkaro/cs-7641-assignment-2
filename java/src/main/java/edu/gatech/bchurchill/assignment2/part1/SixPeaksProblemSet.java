@@ -4,6 +4,7 @@ import dist.DiscreteDependencyTree;
 import dist.DiscreteUniformDistribution;
 import dist.Distribution;
 import edu.gatech.bchurchill.assignment2.Assignment;
+import edu.gatech.bchurchill.assignment2.BaseProblemSet;
 import opt.*;
 import opt.example.SixPeaksEvaluationFunction;
 import opt.ga.*;
@@ -13,7 +14,7 @@ import opt.prob.ProbabilisticOptimizationProblem;
 
 import java.util.Arrays;
 
-public class SixPeaksProblemSet extends Assignment.BaseProblemSet {
+public class SixPeaksProblemSet extends BaseProblemSet {
 
     private EvaluationFunction fitnessFunction;
     private int[] ranges;
