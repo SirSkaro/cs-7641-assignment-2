@@ -5,6 +5,7 @@ import shared.DataSetDescription;
 import shared.Instance;
 import shared.filt.DataSetFilter;
 import shared.reader.DataSetReader;
+import util.linalg.DenseVector;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class LetterDataSetReader extends DataSetReader {
+    private static int NUM_CLASSES = 26;
     private List<DataSetFilter> filters;
 
     public LetterDataSetReader(List<DataSetFilter> filters) {
@@ -46,12 +48,15 @@ public class LetterDataSetReader extends DataSetReader {
 
     private Instance toInstance(String row) {
         String[] elements = row.split(",");
-        int label = ((int)elements[0].charAt(0) % 64);
+        int label = ((int)elements[0].charAt(0) % 65);
         double[] attributes = Stream.of(elements)
                 .skip(1)
                 .mapToDouble(Double::parseDouble)
                 .toArray();
-        return new Instance(attributes, label);
+
+        double[] classes = new double[NUM_CLASSES];
+        classes[label] = 1.0;
+        return new Instance(new DenseVector(attributes), new Instance(classes));
     }
 
 }
