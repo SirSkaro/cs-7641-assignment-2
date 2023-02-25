@@ -84,17 +84,19 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
     }
 
     private double score(FeedForwardNetwork network) {
-        double error = 0.0;
-        GradientErrorMeasure measure = new SumOfSquaresError();
+        double correctClassifications = 0.0;
 
-        for(int i = 0; i < testSet.size(); ++i) {
-            Instance pattern = testSet.get(i);
-            network.setInputValues(pattern.getData());
+        for(Instance testSample : testSet) {
+            network.setInputValues(testSample.getData());
             network.run();
-            Instance output = new Instance(network.getOutputValues());
-            error += measure.value(output, pattern);
+            int networkClassification = network.getOutputValues().argMax();
+            int actualClassification = testSample.getLabel().getData().argMax();
+
+            if(actualClassification == networkClassification) {
+                correctClassifications++;
+            }
         }
 
-        return error / (double)testSet.size();
+        return 1.0 - (correctClassifications / testSet.size());
     }
 }
