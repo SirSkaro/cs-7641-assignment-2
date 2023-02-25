@@ -40,7 +40,17 @@ public class Assignment {
         } else if(mode.equals("part2")) {
             List<DataSetFilter> filters = List.of(new RandomOrderFilter());
             var dataset = new LetterDataSetReader(filters).read();
-            var problemSet = new NeuralNetworkProblemSet(dataset, 90, 1000);
+            int percentTraining = 90;
+            int iterations = 10;
+            var problem = new NeuralNetworkProblemSet(dataset, percentTraining, iterations);
+
+            System.out.println("Problem: " + problem.getName());
+            System.out.println("\tRandomized Hill Climbing");
+            System.out.println("\t\t"+problem.randomizedHillClimbing());
+            System.out.println("\tSimulated Annealing");
+            System.out.println("\t\t"+problem.simulatedAnnealing());
+            System.out.println("\tGenetic Algorithm");
+            System.out.println("\t\t"+problem.geneticAlgorithm());
         } else {
             printIncorrectUsageMessage();
         }

@@ -17,9 +17,9 @@ import shared.filt.TestTrainSplitFilter;
  */
 public class NeuralNetworkProblemSet extends BaseProblemSet {
     private int outputLayerSize;
+    private int inputLayerSize;
     private DataSet trainingSet;
     private DataSet testSet;
-    private int percentTrain;
     private int iterations;
 
     public NeuralNetworkProblemSet(DataSet dataSet, int percentTrain, int iterations) {
@@ -27,8 +27,8 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
         testTrainSplit.filter(dataSet);
         this.trainingSet = testTrainSplit.getTrainingSet();
         this.testSet = testTrainSplit.getTestingSet();
-        this.percentTrain = percentTrain;
         this.outputLayerSize = dataSet.getLabelDataSet().getDescription().getAttributeCount();
+        this.inputLayerSize = dataSet.getDescription().getAttributeCount();
         this.iterations = iterations;
     }
 
@@ -69,7 +69,7 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
     private OptNetworkBuilder baseBuilder() {
         return new OptNetworkBuilder()
                 .withActivationFunction(new ScaledExponentialLinearUnit())
-                .withLayers(new int[] {10, 10, 10, 10, 10, 10, outputLayerSize})
+                .withLayers(new int[] {inputLayerSize, 10, 10, 10, 10, 10, 10, outputLayerSize})
                 .withIterations(iterations)
                 .withDataSet(trainingSet, testSet);
     }

@@ -1,6 +1,7 @@
 package edu.gatech.bchurchill.assignment2.part2;
 
 import shared.DataSet;
+import shared.DataSetDescription;
 import shared.Instance;
 import shared.filt.DataSetFilter;
 import shared.reader.DataSetReader;
@@ -28,13 +29,14 @@ public class LetterDataSetReader extends DataSetReader {
         for(var filter : filters) {
             filter.filter(result);
         }
+        result.setDescription(new DataSetDescription((result)));
         return result;
     }
 
     private Instance[] parseInstances() throws URISyntaxException, IOException {
-        return (Instance[])getLinesFromFile()
+        return getLinesFromFile()
                 .map(this::toInstance)
-                .toArray();
+                .toArray(Instance[]::new);
     }
 
     private Stream<String> getLinesFromFile() throws URISyntaxException, IOException {
@@ -44,7 +46,7 @@ public class LetterDataSetReader extends DataSetReader {
 
     private Instance toInstance(String row) {
         String[] elements = row.split(",");
-        int label = ((int)elements[0].charAt(0) % 65);
+        int label = ((int)elements[0].charAt(0) % 64);
         double[] attributes = Stream.of(elements)
                 .skip(1)
                 .mapToDouble(Double::parseDouble)

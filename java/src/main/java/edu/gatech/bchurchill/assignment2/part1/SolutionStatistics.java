@@ -18,7 +18,7 @@ public class SolutionStatistics {
     @Override
     public String toString() {
         return "{" +
-                "finalPoint=" + finalPoint.getData() +
+                "finalPoint=" + (finalPoint != null ? finalPoint.getData().toString() : "N/A") +
                 ", train time (ms)=" + trainTimeInMs +
                 ", iterations=" + iterations +
                 ", score=" + score +
