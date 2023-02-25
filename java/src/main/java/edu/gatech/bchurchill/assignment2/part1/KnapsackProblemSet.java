@@ -15,6 +15,11 @@ import opt.prob.ProbabilisticOptimizationProblem;
 import java.util.Arrays;
 import java.util.Random;
 
+
+/**
+ * Docs used:
+ *  https://github.com/pushkar/ABAGAIL/blob/master/src/opt/test/KnapsackTest.java
+ */
 public class KnapsackProblemSet extends BaseProblemSet {
     private static final int COPIES_EACH = 4;
     private static final double MAX_VALUE_PER_ELEMENT = 50;

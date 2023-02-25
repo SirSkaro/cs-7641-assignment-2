@@ -14,6 +14,10 @@ import opt.prob.ProbabilisticOptimizationProblem;
 
 import java.util.Arrays;
 
+/**
+ * Docs used:
+ *  https://github.com/pushkar/ABAGAIL/blob/master/src/opt/test/SixPeaksTest.java
+ */
 public class SixPeaksProblemSet extends BaseProblemSet {
 
     private EvaluationFunction fitnessFunction;

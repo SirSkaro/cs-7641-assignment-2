@@ -11,6 +11,10 @@ import opt.prob.GenericProbabilisticOptimizationProblem;
 import opt.prob.MIMIC;
 import opt.prob.ProbabilisticOptimizationProblem;
 
+/**
+ * Docs used:
+ *  https://github.com/pushkar/ABAGAIL/blob/master/src/opt/test/NQueensTest.java
+ */
 public class NQueensProblemSet extends BaseProblemSet {
 
     private int numberQueens;

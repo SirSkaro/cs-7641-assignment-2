@@ -16,6 +16,10 @@ import opt.prob.ProbabilisticOptimizationProblem;
 
 import java.util.Random;
 
+/**
+ * Docs used:
+ *  https://github.com/pushkar/ABAGAIL/blob/master/src/opt/test/TravelingSalesmanTest.java
+ */
 public class TravelingSalesmanProblemSet extends BaseProblemSet {
 
     private int cityCount;
