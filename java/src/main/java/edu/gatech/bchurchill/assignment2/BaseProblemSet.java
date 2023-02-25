@@ -1,7 +1,6 @@
 package edu.gatech.bchurchill.assignment2;
 
 import edu.gatech.bchurchill.assignment2.part1.ConvergenceIterationTrainer;
-import edu.gatech.bchurchill.assignment2.part1.SolutionStatistics;
 import opt.EvaluationFunction;
 import opt.OptimizationAlgorithm;
 import shared.Instance;

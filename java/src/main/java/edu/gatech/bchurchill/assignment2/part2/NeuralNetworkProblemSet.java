@@ -1,13 +1,11 @@
 package edu.gatech.bchurchill.assignment2.part2;
 
 import edu.gatech.bchurchill.assignment2.BaseProblemSet;
-import edu.gatech.bchurchill.assignment2.part1.SolutionStatistics;
+import edu.gatech.bchurchill.assignment2.SolutionStatistics;
 import func.nn.OptNetworkBuilder;
 import func.nn.feedfwd.FeedForwardNetwork;
 import shared.DataSet;
-import shared.GradientErrorMeasure;
 import shared.Instance;
-import shared.SumOfSquaresError;
 import shared.filt.TestTrainSplitFilter;
 
 /**
