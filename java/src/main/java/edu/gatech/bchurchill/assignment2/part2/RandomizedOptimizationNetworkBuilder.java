@@ -1,5 +1,6 @@
 package edu.gatech.bchurchill.assignment2.part2;
 
+import edu.gatech.bchurchill.assignment2.ConvergenceIterationTrainer;
 import func.nn.NetworkBuilder;
 import func.nn.activation.ActivationFunction;
 import func.nn.activation.DifferentiableActivationFunction;
@@ -26,7 +27,7 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
     public RandomizedOptimizationNetworkBuilder(DifferentiableActivationFunction activationFunction, int[] layers) {
         this.layers = layers;
         this.activationFunction = activationFunction;
-        errorMeasure = new SumOfSquaresError();
+        this.errorMeasure = new SumOfSquaresError();
 
         network = new FeedForwardNeuralNetworkFactory().createClassificationNetwork(this.layers, this.activationFunction);
     }
@@ -66,13 +67,8 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
     }
 
     public FeedForwardNetwork train() {
-        for(int iteration = 0; iteration < this.iterations; iteration++) {
-            algorithm.train();
-            double trainScore = this.calculateTrainScore();
-            double testScore = this.calculateTestScore();
-            System.out.println(String.format("Iteration %d | Train score: %f | Test score: %f", iteration + 1, trainScore, testScore));
-        }
-
+        Trainer trainer = new ConvergenceIterationTrainer(algorithm, 20, iterations, 0.01);
+        trainer.train();
         return this.network;
     }
 

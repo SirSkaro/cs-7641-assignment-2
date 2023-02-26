@@ -1,6 +1,5 @@
 package edu.gatech.bchurchill.assignment2;
 
-import edu.gatech.bchurchill.assignment2.part1.ConvergenceIterationTrainer;
 import opt.EvaluationFunction;
 import opt.OptimizationAlgorithm;
 import shared.Instance;
@@ -8,7 +7,7 @@ import shared.Instance;
 public abstract class BaseProblemSet implements OptimizationProblemSet {
     protected SolutionStatistics solve(OptimizationAlgorithm algorithm, EvaluationFunction fitnessFunction) {
         long startTime = System.currentTimeMillis();
-        ConvergenceIterationTrainer trainer = new ConvergenceIterationTrainer(algorithm, 20, 50_000);
+        ConvergenceIterationTrainer trainer = new ConvergenceIterationTrainer(algorithm, 20, 50_000, 0.125);
         trainer.train();
         long trainTime = System.currentTimeMillis() - startTime;
 

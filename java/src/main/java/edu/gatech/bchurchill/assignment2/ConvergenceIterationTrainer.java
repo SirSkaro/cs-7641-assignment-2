@@ -1,4 +1,4 @@
-package edu.gatech.bchurchill.assignment2.part1;
+package edu.gatech.bchurchill.assignment2;
 
 import shared.Trainer;
 
@@ -8,11 +8,19 @@ public class ConvergenceIterationTrainer implements Trainer {
     private int threshold;
     private int iterations;
     private int maxIterations;
+    private double tolerance;
 
     public ConvergenceIterationTrainer(Trainer trainer, int threshold, int maxIterations) {
         this.trainer = trainer;
         this.threshold = threshold;
         this.maxIterations = maxIterations;
+        this.tolerance = 0.001;
+    }
+    public ConvergenceIterationTrainer(Trainer trainer, int threshold, int maxIterations, double tolerance) {
+        this.trainer = trainer;
+        this.threshold = threshold;
+        this.maxIterations = maxIterations;
+        this.tolerance = tolerance;
     }
 
     @Override
@@ -26,11 +34,13 @@ public class ConvergenceIterationTrainer implements Trainer {
             previousScore = score;
             score = this.trainer.train();
 
-            if(previousScore == score) {
+            if(equalWithinTolerance(score, previousScore)) {
                 duplicateScoreCount++;
             } else {
                 duplicateScoreCount = 0;
             }
+
+            //System.out.println(String.format("Iteration %d | score: %f", iterations, score));
 
         } while(duplicateScoreCount < this.threshold
                 && this.iterations < this.maxIterations);
@@ -40,6 +50,10 @@ public class ConvergenceIterationTrainer implements Trainer {
 
     public int getIterations() {
         return this.iterations;
+    }
+
+    private boolean equalWithinTolerance(double score1, double score2) {
+        return Math.abs(score1 - score2) < tolerance;
     }
 
 }
