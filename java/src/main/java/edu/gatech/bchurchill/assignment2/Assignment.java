@@ -20,10 +20,10 @@ public class Assignment {
 
         if(mode.equals("part1")) {
             List<OptimizationProblemSet> problems = List.of(
-                    new NQueensProblemSet(8),
-                    new KnapsackProblemSet(8),
-                    new SixPeaksProblemSet(10),
-                    new TravelingSalesmanProblemSet(8)
+                    new NQueensProblemSet(85)
+//                    new KnapsackProblemSet(40),
+//                    new SixPeaksProblemSet(10),
+//                    new TravelingSalesmanProblemSet(20)
             );
 
             for(var problem: problems) {

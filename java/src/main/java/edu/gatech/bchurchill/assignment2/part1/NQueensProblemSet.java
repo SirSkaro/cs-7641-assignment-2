@@ -4,6 +4,7 @@ import dist.DiscreteDependencyTree;
 import dist.DiscretePermutationDistribution;
 import dist.Distribution;
 import edu.gatech.bchurchill.assignment2.BaseProblemSet;
+import edu.gatech.bchurchill.assignment2.ConvergenceSpec;
 import edu.gatech.bchurchill.assignment2.SolutionStatistics;
 import opt.*;
 import opt.ga.*;
@@ -22,7 +23,7 @@ public class NQueensProblemSet extends BaseProblemSet {
 
     public NQueensProblemSet(int numberQueens) {
         this.numberQueens = numberQueens;
-        this.fitnessFunction = new NQueensFitnessFunction();
+        this.fitnessFunction = new BetterNQueensFitnessFunction();
     }
 
     @Override
@@ -42,16 +43,22 @@ public class NQueensProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics simulatedAnnealing() {
+        double temperature = 10_000;
+        double decay = 0.95;
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 3000, 0.0);
+
         NeighborFunction neighborFunction = new SwapNeighbor();
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
         HillClimbingProblem problem = new GenericHillClimbingProblem(fitnessFunction, distribution, neighborFunction);
-        OptimizationAlgorithm algorithm = new SimulatedAnnealing(1E1, .1, problem);
+        OptimizationAlgorithm algorithm = new SimulatedAnnealing(temperature, decay, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
+        
+
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
         MutationFunction mutationFunction = new SwapMutation();
         CrossoverFunction crossoverFunction = new SingleCrossOver();

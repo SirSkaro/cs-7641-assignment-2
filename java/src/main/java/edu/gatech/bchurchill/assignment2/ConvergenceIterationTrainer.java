@@ -10,12 +10,6 @@ public class ConvergenceIterationTrainer implements Trainer {
     private int maxIterations;
     private double tolerance;
 
-    public ConvergenceIterationTrainer(Trainer trainer, int threshold, int maxIterations) {
-        this.trainer = trainer;
-        this.threshold = threshold;
-        this.maxIterations = maxIterations;
-        this.tolerance = 0.001;
-    }
     public ConvergenceIterationTrainer(Trainer trainer, int threshold, int maxIterations, double tolerance) {
         this.trainer = trainer;
         this.threshold = threshold;
@@ -53,7 +47,7 @@ public class ConvergenceIterationTrainer implements Trainer {
     }
 
     private boolean equalWithinTolerance(double score1, double score2) {
-        return Math.abs(score1 - score2) < tolerance;
+        return Math.abs(score1 - score2) <= tolerance;
     }
 
 }

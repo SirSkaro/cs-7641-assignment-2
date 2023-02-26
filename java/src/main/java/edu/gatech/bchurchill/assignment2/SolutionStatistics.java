@@ -18,10 +18,10 @@ public class SolutionStatistics {
     @Override
     public String toString() {
         return "{" +
-                "finalPoint=" + (finalPoint != null ? finalPoint.getData().toString() : "N/A") +
+                //"finalPoint=" + (finalPoint != null ? finalPoint.getData().toString() : "N/A") +
                 ", train time (ms)=" + trainTimeInMs +
                 ", iterations=" + iterations +
-                ", score=" + score +
+                ", score=" + (score == Double.MAX_VALUE ? "inf" : score)  +
                 '}';
     }
 }
