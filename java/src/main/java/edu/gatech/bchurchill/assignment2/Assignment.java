@@ -49,8 +49,8 @@ public class Assignment {
             System.out.println("\t\t"+problem.randomizedHillClimbing());
             System.out.println("\tSimulated Annealing");
             System.out.println("\t\t"+problem.simulatedAnnealing());
-            System.out.println("\tGenetic Algorithm");
-            System.out.println("\t\t"+problem.geneticAlgorithm());
+            //System.out.println("\tGenetic Algorithm");
+            //System.out.println("\t\t"+problem.geneticAlgorithm());
         } else {
             printIncorrectUsageMessage();
         }
