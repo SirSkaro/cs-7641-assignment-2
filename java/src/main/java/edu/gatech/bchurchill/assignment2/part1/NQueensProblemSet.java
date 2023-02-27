@@ -57,15 +57,18 @@ public class NQueensProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
-        
+        int populationSize = 1000;
+        int populationToMate = 50;
+        int populationToMutate = 100;
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 20, 1.0);
 
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
         MutationFunction mutationFunction = new SwapMutation();
-        CrossoverFunction crossoverFunction = new SingleCrossOver();
+        CrossoverFunction crossoverFunction = new TwoPointCrossOver();
         GeneticAlgorithmProblem problem = new GenericGeneticAlgorithmProblem(fitnessFunction, distribution, mutationFunction, crossoverFunction);
-        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(200, 0, 10, problem);
+        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 
     @Override

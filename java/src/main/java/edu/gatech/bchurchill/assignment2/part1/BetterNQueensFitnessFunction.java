@@ -10,6 +10,7 @@ import java.util.List;
 public class BetterNQueensFitnessFunction implements EvaluationFunction {
     private int fEvals = 0;
     private NQueensBoardGame currentBoard;
+    private boolean printedSolved = false;
 
     public BetterNQueensFitnessFunction() {
     }
@@ -22,6 +23,7 @@ public class BetterNQueensFitnessFunction implements EvaluationFunction {
         int boardSize = board.getSize();
         List<BoardLocation> qPositions = board.getQueenPositions();
         boolean solved = true;
+
 
         for(int fromX = 0; fromX < boardSize - 1; ++fromX) {
             for(int toX = fromX + 1; toX < boardSize; ++toX) {
@@ -48,6 +50,11 @@ public class BetterNQueensFitnessFunction implements EvaluationFunction {
                     ++fitness;
                 }
             }
+        }
+
+        if(solved && !printedSolved) {
+            System.out.println("Solved");
+            printedSolved = true;
         }
 
         return fitness;
