@@ -4,9 +4,10 @@ import dist.DiscreteDependencyTree;
 import dist.DiscreteUniformDistribution;
 import dist.Distribution;
 import edu.gatech.bchurchill.assignment2.BaseProblemSet;
+import edu.gatech.bchurchill.assignment2.ConvergenceSpec;
 import edu.gatech.bchurchill.assignment2.SolutionStatistics;
 import opt.*;
-import opt.example.SixPeaksEvaluationFunction;
+import opt.example.FourPeaksEvaluationFunction;
 import opt.ga.*;
 import opt.prob.GenericProbabilisticOptimizationProblem;
 import opt.prob.MIMIC;
@@ -18,14 +19,14 @@ import java.util.Arrays;
  * Docs used:
  *  https://github.com/pushkar/ABAGAIL/blob/master/src/opt/test/SixPeaksTest.java
  */
-public class SixPeaksProblemSet extends BaseProblemSet {
+public class FourPeaksProblemSet extends BaseProblemSet {
 
     private EvaluationFunction fitnessFunction;
     private int[] ranges;
 
-    public SixPeaksProblemSet(int N) {
+    public FourPeaksProblemSet(int N) {
         int T = N / 5;
-        this.fitnessFunction = new SixPeaksEvaluationFunction(T);
+        this.fitnessFunction = new BetterFourPeaksEvaluationFunction(T);
 
         ranges = new int[N];
         Arrays.fill(ranges, 2);
@@ -33,7 +34,7 @@ public class SixPeaksProblemSet extends BaseProblemSet {
 
     @Override
     public String getName() {
-        return "Six Peaks";
+        return "Four Peaks";
     }
 
     @Override
@@ -48,23 +49,32 @@ public class SixPeaksProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics simulatedAnnealing() {
+        double temperature = 1E11;
+        double decay = 0.95;
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 3000, 0.0);
+
         NeighborFunction neighborFunction = new DiscreteChangeOneNeighbor(ranges);
         Distribution distribution = new DiscreteUniformDistribution(ranges);
         HillClimbingProblem problem = new GenericHillClimbingProblem(fitnessFunction, distribution, neighborFunction);
-        OptimizationAlgorithm algorithm = new SimulatedAnnealing(1E11, .95, problem);
+        OptimizationAlgorithm algorithm = new SimulatedAnnealing(temperature, decay, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
+        int populationSize = 1000;
+        int populationToMate = (int)(populationSize * 1.0);
+        int populationToMutate = (int)(populationSize * 0.1);
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 10, 0.0);
+
         Distribution distribution = new DiscreteUniformDistribution(ranges);
         MutationFunction mutationFunction = new DiscreteChangeOneMutation(ranges);
         CrossoverFunction crossoverFunction = new SingleCrossOver();
         GeneticAlgorithmProblem problem = new GenericGeneticAlgorithmProblem(fitnessFunction, distribution, mutationFunction, crossoverFunction);
-        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(200, 100, 10, problem);
+        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 
     @Override
