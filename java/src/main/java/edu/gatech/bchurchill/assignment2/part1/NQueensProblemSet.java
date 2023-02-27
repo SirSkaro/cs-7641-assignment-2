@@ -73,11 +73,15 @@ public class NQueensProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics mimic() {
+        int samples = 300;
+        int toKeep = 150;
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 10, 0.0);
+
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
         Distribution dependencyTreeDistribution = new DiscreteDependencyTree(.1);
         ProbabilisticOptimizationProblem problem = new GenericProbabilisticOptimizationProblem(fitnessFunction, distribution, dependencyTreeDistribution);
-        MIMIC algorithm = new MIMIC(200, 10, problem);
+        MIMIC algorithm = new MIMIC(samples, toKeep, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 }
