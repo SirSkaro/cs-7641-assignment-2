@@ -79,11 +79,15 @@ public class FourPeaksProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics mimic() {
+        int samples = 5000;
+        int toKeep = 35;
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 10, 0.0);
+
         Distribution distribution = new DiscreteUniformDistribution(ranges);
         Distribution dependencyTreeDistribution = new DiscreteDependencyTree(.1, ranges);
         ProbabilisticOptimizationProblem problem = new GenericProbabilisticOptimizationProblem(fitnessFunction, distribution, dependencyTreeDistribution);
-        MIMIC algorithm = new MIMIC(200, 20, problem);
+        MIMIC algorithm = new MIMIC(samples, toKeep, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 }
