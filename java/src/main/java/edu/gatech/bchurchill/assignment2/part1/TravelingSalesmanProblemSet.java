@@ -4,6 +4,7 @@ import dist.DiscreteDependencyTree;
 import dist.DiscretePermutationDistribution;
 import dist.Distribution;
 import edu.gatech.bchurchill.assignment2.BaseProblemSet;
+import edu.gatech.bchurchill.assignment2.ConvergenceSpec;
 import edu.gatech.bchurchill.assignment2.SolutionStatistics;
 import opt.*;
 import opt.example.TravelingSalesmanCrossOver;
@@ -56,23 +57,32 @@ public class TravelingSalesmanProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics simulatedAnnealing() {
+        double temperature = 1E25;
+        double decay = 0.99;
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 3000, 0.0);
+
         NeighborFunction neighborFunction = new SwapNeighbor();
         Distribution distribution = new DiscretePermutationDistribution(cityCount);
         HillClimbingProblem problem = new GenericHillClimbingProblem(fitnessFunction, distribution, neighborFunction);
-        OptimizationAlgorithm algorithm = new SimulatedAnnealing(1E12, .95, problem);
+        OptimizationAlgorithm algorithm = new SimulatedAnnealing(temperature, decay, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
+        int populationSize = 2000;
+        int populationToMate = (int)(populationSize * 1.0);
+        int populationToMutate = (int)(populationSize * 0.25);
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 35, 0.0005);
+
         Distribution distribution = new DiscretePermutationDistribution(cityCount);
         MutationFunction mutationFunction = new SwapMutation();
         CrossoverFunction crossoverFunction = new TravelingSalesmanCrossOver((TravelingSalesmanEvaluationFunction) fitnessFunction);
         GeneticAlgorithmProblem problem = new GenericGeneticAlgorithmProblem(fitnessFunction, distribution, mutationFunction, crossoverFunction);
-        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(200, 150, 20, problem);
+        StandardGeneticAlgorithm algorithm = new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 
     @Override

@@ -22,8 +22,8 @@ public class Assignment {
             List<OptimizationProblemSet> problems = List.of(
 //                    new NQueensProblemSet(150),
 //                    new KnapsackProblemSet(40)
-                    new FourPeaksProblemSet(100)
-//                    new TravelingSalesmanProblemSet(20)
+//                    new FourPeaksProblemSet(100)
+                    new TravelingSalesmanProblemSet(50)
             );
 
             for(var problem: problems) {
@@ -34,8 +34,8 @@ public class Assignment {
                 System.out.println("\t\t"+problem.simulatedAnnealing());
                 System.out.println("\tGenetic Algorithm");
                 System.out.println("\t\t"+problem.geneticAlgorithm());
-                System.out.println("\tMIMIC");
-                System.out.println("\t\t"+problem.mimic());
+//                System.out.println("\tMIMIC");
+//                System.out.println("\t\t"+problem.mimic());
             }
         } else if(mode.equals("part2")) {
             List<DataSetFilter> filters = List.of(new RandomOrderFilter());
