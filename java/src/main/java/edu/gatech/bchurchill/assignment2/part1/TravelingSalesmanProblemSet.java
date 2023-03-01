@@ -87,11 +87,15 @@ public class TravelingSalesmanProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics mimic() {
+        int samples = 5000;
+        int toKeep = (int)(samples * 0.2);
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 50, 0.0);
+
         Distribution distribution = new DiscretePermutationDistribution(cityCount);
         Distribution dependencyTreeDistribution = new DiscreteDependencyTree(.1);
         ProbabilisticOptimizationProblem problem = new GenericProbabilisticOptimizationProblem(fitnessFunction, distribution, dependencyTreeDistribution);
-        MIMIC algorithm = new MIMIC(200, 100, problem);
+        MIMIC algorithm = new MIMIC(samples, toKeep, problem);
 
-        return solve(algorithm, fitnessFunction);
+        return solve(algorithm, fitnessFunction, convergenceSpec);
     }
 }
