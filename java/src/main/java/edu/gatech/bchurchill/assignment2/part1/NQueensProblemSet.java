@@ -60,7 +60,7 @@ public class NQueensProblemSet extends BaseProblemSet {
         int populationSize = 1000;
         int populationToMate = (int)(populationSize * 0.5);
         int populationToMutate = (int)(populationSize * 0.5);
-        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 20, 1.0);
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 100, 2.0);
 
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
         MutationFunction mutationFunction = new SwapMutation();
