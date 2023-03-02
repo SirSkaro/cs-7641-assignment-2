@@ -58,8 +58,8 @@ public class NQueensProblemSet extends BaseProblemSet {
     @Override
     public SolutionStatistics geneticAlgorithm() {
         int populationSize = 1000;
-        int populationToMate = 50;
-        int populationToMutate = 100;
+        int populationToMate = (int)(populationSize * 0.5);
+        int populationToMutate = (int)(populationSize * 0.5);
         ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 20, 1.0);
 
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
@@ -74,7 +74,7 @@ public class NQueensProblemSet extends BaseProblemSet {
     @Override
     public SolutionStatistics mimic() {
         int samples = 300;
-        int toKeep = 150;
+        int toKeep = (int)(samples * 0.5);
         ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 10, 0.0);
 
         Distribution distribution = new DiscretePermutationDistribution(numberQueens);
