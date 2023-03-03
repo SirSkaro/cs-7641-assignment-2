@@ -7,6 +7,7 @@ import shared.filt.DataSetFilter;
 import shared.filt.RandomOrderFilter;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 public class Assignment {
@@ -52,33 +53,41 @@ public class Assignment {
             System.out.println("\tGenetic Algorithm");
             System.out.println("\t\t"+problem.geneticAlgorithm());
         } else if (mode.equals("export1")) {
-            List<OptimizationProblemSet> problems = List.of(
-                    new NQueensProblemSet(150),
-                    new FourPeaksProblemSet(100),
-                    new TravelingSalesmanProblemSet(25)
+            List<Supplier<OptimizationProblemSet>> problems = List.of(
+                    () -> new NQueensProblemSet(150),
+                    () ->  new FourPeaksProblemSet(100),
+                    () -> new TravelingSalesmanProblemSet(25)
             );
             int runCount = 2;
 
             for(var problem: problems) {
-                System.out.println(problem.getName());
+                System.out.println(problem.get().getName());
                 System.out.println("\tRunning Randomized Hill Climbing...");
-                CsvWriter writer = new CsvWriter(problem.getName() + " RHC.csv");
-                var results = IntStream.range(0, runCount).mapToObj(run -> problem.randomizedHillClimbing());
+                CsvWriter writer = new CsvWriter(problem.get().getName() + " RHC.csv");
+                var results = IntStream.range(0, runCount)
+                        .mapToObj(run -> problem.get())
+                        .map(OptimizationProblemSet::randomizedHillClimbing);
                 writer.writeToFile(results);
 
                 System.out.println("\tRunning Simulated Annealing...");
-                writer = new CsvWriter(problem.getName() + " SA.csv");
-                results = IntStream.range(0, runCount).mapToObj(run -> problem.simulatedAnnealing());
+                writer = new CsvWriter(problem.get().getName() + " SA.csv");
+                results = IntStream.range(0, runCount)
+                        .mapToObj(run -> problem.get())
+                        .map(OptimizationProblemSet::simulatedAnnealing);
                 writer.writeToFile(results);
 
                 System.out.println("\tRunning Genetic Algorithm...");
-                writer = new CsvWriter(problem.getName() + " GA.csv");
-                results = IntStream.range(0, runCount).mapToObj(run -> problem.geneticAlgorithm());
+                writer = new CsvWriter(problem.get().getName() + " GA.csv");
+                results = IntStream.range(0, runCount)
+                        .mapToObj(run -> problem.get())
+                        .map(OptimizationProblemSet::geneticAlgorithm);
                 writer.writeToFile(results);
 
                 System.out.println("\tRunning MIMIC...");
-                writer = new CsvWriter(problem.getName() + " MIMIC.csv");
-                results = IntStream.range(0, runCount).mapToObj(run -> problem.mimic());
+                writer = new CsvWriter(problem.get().getName() + " MIMIC.csv");
+                results = IntStream.range(0, runCount)
+                        .mapToObj(run -> problem.get())
+                        .map(OptimizationProblemSet::mimic);
                 writer.writeToFile(results);
 
                 System.out.println("Done");
