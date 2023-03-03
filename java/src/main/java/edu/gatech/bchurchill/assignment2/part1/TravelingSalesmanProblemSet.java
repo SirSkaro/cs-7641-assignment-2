@@ -74,7 +74,7 @@ public class TravelingSalesmanProblemSet extends BaseProblemSet {
         int populationSize = 2000;
         int populationToMate = (int)(populationSize * 1.0);
         int populationToMutate = (int)(populationSize * 0.25);
-        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 35, 0.0005);
+        ConvergenceSpec convergenceSpec = new ConvergenceSpec(50_000, 100, 0.005);
 
         Distribution distribution = new DiscretePermutationDistribution(cityCount);
         MutationFunction mutationFunction = new SwapMutation();

@@ -23,7 +23,7 @@ public class Assignment {
             List<OptimizationProblemSet> problems = List.of(
                     new NQueensProblemSet(150),
                     new FourPeaksProblemSet(100),
-                    new TravelingSalesmanProblemSet(50)
+                    new TravelingSalesmanProblemSet(25)
             );
 
             for(var problem: problems) {
@@ -55,7 +55,7 @@ public class Assignment {
             List<OptimizationProblemSet> problems = List.of(
                     new NQueensProblemSet(150),
                     new FourPeaksProblemSet(100),
-                    new TravelingSalesmanProblemSet(50)
+                    new TravelingSalesmanProblemSet(25)
             );
             int runCount = 2;
 
