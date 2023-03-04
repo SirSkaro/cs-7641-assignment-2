@@ -22,8 +22,8 @@ public class Assignment {
 
         if(mode.equals("part1")) {
             List<OptimizationProblemSet> problems = List.of(
-                    new NQueensProblemSet(150),
-                    new FourPeaksProblemSet(100),
+                    new NQueensProblemSet(100),
+                    new FourPeaksProblemSet(150),
                     new TravelingSalesmanProblemSet(25)
             );
 
@@ -42,7 +42,7 @@ public class Assignment {
             List<DataSetFilter> filters = List.of(new RandomOrderFilter());
             var dataset = new LetterDataSetReader(filters).read();
             int percentTraining = 85;
-            int iterations = 10;
+            int iterations = 1000000;
             var problem = new NeuralNetworkProblemSet(dataset, percentTraining, iterations);
 
             System.out.println("Problem: " + problem.getName());
@@ -50,15 +50,15 @@ public class Assignment {
             System.out.println("\t\t"+problem.randomizedHillClimbing());
             System.out.println("\tSimulated Annealing");
             System.out.println("\t\t"+problem.simulatedAnnealing());
-            System.out.println("\tGenetic Algorithm");
-            System.out.println("\t\t"+problem.geneticAlgorithm());
+//            System.out.println("\tGenetic Algorithm");
+//            System.out.println("\t\t"+problem.geneticAlgorithm());
         } else if (mode.equals("export1")) {
             List<Supplier<OptimizationProblemSet>> problems = List.of(
                     () -> new NQueensProblemSet(150),
                     () ->  new FourPeaksProblemSet(100),
                     () -> new TravelingSalesmanProblemSet(25)
             );
-            int runCount = 2;
+            int runCount = 100;
 
             for(var problem: problems) {
                 System.out.println(problem.get().getName());

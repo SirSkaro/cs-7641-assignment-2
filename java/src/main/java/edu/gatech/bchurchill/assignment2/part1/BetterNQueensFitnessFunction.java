@@ -53,7 +53,7 @@ public class BetterNQueensFitnessFunction implements EvaluationFunction {
         }
 
         if(solved && !printedSolved) {
-            System.out.println("Solved");
+            //System.out.println("Solved");
             printedSolved = true;
         }
 
