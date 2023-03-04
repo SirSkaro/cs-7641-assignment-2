@@ -67,8 +67,15 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
         return this;
     }
 
+    public RandomizedOptimizationNetworkBuilder withTrainer(Function<OptimizationAlgorithm, ConvergenceIterationTrainer> trainerSupplier) {
+        this.trainer = trainerSupplier.apply(this.algorithm);
+        return this;
+    }
+
     public FeedForwardNetwork train() {
-        trainer = new ConvergenceIterationTrainer(algorithm, 20, iterations, 0.0);
+        if(trainer == null) {
+            trainer = new ConvergenceIterationTrainer(algorithm, 20, iterations, 0.0);
+        }
 
         trainer.train();
         return this.network;

@@ -48,16 +48,16 @@ public class Assignment {
             var problem = new NeuralNetworkProblemSet(dataset, percentTraining, iterations);
 
             System.out.println("Problem: " + problem.getName());
-            System.out.println("\tRandomized Hill Climbing");
-            System.out.println("\t\t"+problem.randomizedHillClimbing());
-            System.out.println("\tSimulated Annealing");
-            System.out.println("\t\t"+problem.simulatedAnnealing());
+//            System.out.println("\tRandomized Hill Climbing");
+//            System.out.println("\t\t"+problem.randomizedHillClimbing());
+//            System.out.println("\tSimulated Annealing");
+//            System.out.println("\t\t"+problem.simulatedAnnealing());
             System.out.println("\tGenetic Algorithm");
             System.out.println("\t\t"+problem.geneticAlgorithm());
         } else if (mode.equals("export1")) {
             List<Supplier<OptimizationProblemSet>> problems = List.of(
                     () -> new NQueensProblemSet(150),
-                    () ->  new FourPeaksProblemSet(100),
+                    () -> new FourPeaksProblemSet(100),
                     () -> new TravelingSalesmanProblemSet(25)
             );
             int runCount = 100;

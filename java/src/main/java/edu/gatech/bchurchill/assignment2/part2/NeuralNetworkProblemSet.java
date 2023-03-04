@@ -42,28 +42,31 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
     @Override
     public SolutionStatistics randomizedHillClimbing() {
         var network = baseBuilder()
-                .withAlgorithm(RandomizedHillClimbing::new);
+                .withAlgorithm(RandomizedHillClimbing::new)
+                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 250, iterations, 0.0));
 
         return solve(network);
     }
 
     @Override
     public SolutionStatistics simulatedAnnealing() {
-        var initialTemperature = 1E5;
+        var initialTemperature = 1000;
         var temperatureDecay = 0.99999;
         var network = baseBuilder()
-                .withAlgorithm(problem -> new SimulatedAnnealing(initialTemperature, temperatureDecay, problem));
+                .withAlgorithm(problem -> new SimulatedAnnealing(initialTemperature, temperatureDecay, problem))
+                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 1500, iterations, 0.0));
 
         return solve(network);
     }
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
-        var populationSize = 1000;
-        int populationToMate = (int)(populationSize * 0.85);
-        int populationToMutate = (int)(populationSize * 0.25);
+        var populationSize = 5;
+        int populationToMate = (int)(populationSize * 0.80);
+        int populationToMutate = (int)(populationSize * 0.20);
         var network = baseBuilder()
-                .withAlgorithm(problem -> new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem));
+                .withAlgorithm(problem -> new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem))
+                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 2, iterations, 0.0));
 
         return solve(network);
     }
