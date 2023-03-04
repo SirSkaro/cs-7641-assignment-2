@@ -51,10 +51,10 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
     @Override
     public SolutionStatistics simulatedAnnealing() {
         var initialTemperature = 1;
-        var temperatureDecay = 0.95;
+        var temperatureDecay = 0.85;
         var network = baseBuilder()
                 .withAlgorithm(problem -> new SimulatedAnnealing(initialTemperature, temperatureDecay, problem))
-                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 500, iterations, 0.000000005));
+                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 1000, iterations, 0.0000000005));
 
         return solve(network);
     }
