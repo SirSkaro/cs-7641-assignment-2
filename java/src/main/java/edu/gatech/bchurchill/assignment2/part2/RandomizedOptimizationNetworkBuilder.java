@@ -4,14 +4,11 @@ import edu.gatech.bchurchill.assignment2.ConvergenceIterationTrainer;
 import func.nn.NetworkBuilder;
 import func.nn.activation.ActivationFunction;
 import func.nn.activation.DifferentiableActivationFunction;
-import func.nn.activation.HyperbolicTangentSigmoid;
 import func.nn.feedfwd.FeedForwardNetwork;
 import func.nn.feedfwd.FeedForwardNeuralNetworkFactory;
 import opt.OptimizationAlgorithm;
-import opt.example.NeuralNetworkOptimizationProblem;
 import shared.*;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.function.Function;
 
 public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
@@ -61,8 +58,8 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
         return this;
     }
 
-    public RandomizedOptimizationNetworkBuilder withAlgorithm(Function<NeuralNetworkOptimizationProblem, OptimizationAlgorithm> algorithmSupplier) {
-        NeuralNetworkOptimizationProblem problem = new NeuralNetworkOptimizationProblem(this.set, this.network, this.errorMeasure);
+    public RandomizedOptimizationNetworkBuilder withAlgorithm(Function<CustomNeuralNetworkOptimizationProblem, OptimizationAlgorithm> algorithmSupplier) {
+        CustomNeuralNetworkOptimizationProblem problem = new CustomNeuralNetworkOptimizationProblem(this.set, this.network, this.errorMeasure);
         this.algorithm = algorithmSupplier.apply(problem);
         return this;
     }

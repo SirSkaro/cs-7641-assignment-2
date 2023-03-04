@@ -43,14 +43,14 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
     public SolutionStatistics randomizedHillClimbing() {
         var network = baseBuilder()
                 .withAlgorithm(RandomizedHillClimbing::new)
-                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 250, iterations, 0.0));
+                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 1000, iterations, 0.0000000005));
 
         return solve(network);
     }
 
     @Override
     public SolutionStatistics simulatedAnnealing() {
-        var initialTemperature = 1000;
+        var initialTemperature = 100000;
         var temperatureDecay = 0.99999;
         var network = baseBuilder()
                 .withAlgorithm(problem -> new SimulatedAnnealing(initialTemperature, temperatureDecay, problem))
@@ -61,9 +61,9 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
-        var populationSize = 5;
-        int populationToMate = (int)(populationSize * 0.80);
-        int populationToMutate = (int)(populationSize * 0.20);
+        var populationSize = 50;
+        int populationToMate = (int)(populationSize * 0.50);
+        int populationToMutate = (int)(populationSize * 0.10);
         var network = baseBuilder()
                 .withAlgorithm(problem -> new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem))
                 .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 2, iterations, 0.0));

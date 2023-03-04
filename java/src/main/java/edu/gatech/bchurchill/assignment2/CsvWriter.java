@@ -1,4 +1,4 @@
-package edu.gatech.bchurchill.assignment2.part1;
+package edu.gatech.bchurchill.assignment2;
 
 import edu.gatech.bchurchill.assignment2.SolutionStatistics;
 
