@@ -36,8 +36,7 @@ public class ConvergenceIterationTrainer implements Trainer {
 
             //System.out.println(String.format("Iteration %d | score: %f", iterations, score));
 
-        } while(duplicateScoreCount < this.threshold
-                && this.iterations < this.maxIterations);
+        } while(stoppingConditionNotMet(duplicateScoreCount));
 
         return score;
     }
@@ -48,6 +47,13 @@ public class ConvergenceIterationTrainer implements Trainer {
 
     private boolean equalWithinTolerance(double score1, double score2) {
         return Math.abs(score1 - score2) <= tolerance;
+    }
+
+    private boolean stoppingConditionNotMet(int duplicateScoreCount) {
+        boolean lessThanThreshold = duplicateScoreCount < this.threshold;
+        boolean underMaxIterations = (this.maxIterations == -1) ? true : (this.iterations < this.maxIterations);
+
+        return lessThanThreshold && underMaxIterations;
     }
 
 }

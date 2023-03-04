@@ -3,6 +3,7 @@ package edu.gatech.bchurchill.assignment2;
 import edu.gatech.bchurchill.assignment2.part1.*;
 import edu.gatech.bchurchill.assignment2.part2.LetterDataSetReader;
 import edu.gatech.bchurchill.assignment2.part2.NeuralNetworkProblemSet;
+import edu.gatech.bchurchill.assignment2.part2.ScribeDataSetReader;
 import shared.filt.DataSetFilter;
 import shared.filt.RandomOrderFilter;
 
@@ -40,9 +41,10 @@ public class Assignment {
             }
         } else if(mode.equals("part2")) {
             List<DataSetFilter> filters = List.of(new RandomOrderFilter());
-            var dataset = new LetterDataSetReader(filters).read();
+            //var dataset = new LetterDataSetReader(filters).read();
+            var dataset = new ScribeDataSetReader(filters).read();
             int percentTraining = 85;
-            int iterations = 1000000;
+            int iterations = -1;
             var problem = new NeuralNetworkProblemSet(dataset, percentTraining, iterations);
 
             System.out.println("Problem: " + problem.getName());

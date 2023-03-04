@@ -23,6 +23,7 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
     private DataSet testSet;
     private int iterations = 1000;
     private OptimizationAlgorithm algorithm;
+    private ConvergenceIterationTrainer trainer;
 
     public RandomizedOptimizationNetworkBuilder(DifferentiableActivationFunction activationFunction, int[] layers) {
         this.layers = layers;
@@ -67,7 +68,8 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
     }
 
     public FeedForwardNetwork train() {
-        Trainer trainer = new ConvergenceIterationTrainer(algorithm, 20, iterations, 0.01);
+        trainer = new ConvergenceIterationTrainer(algorithm, 20, iterations, 0.0);
+
         trainer.train();
         return this.network;
     }
@@ -103,4 +105,7 @@ public class RandomizedOptimizationNetworkBuilder implements NetworkBuilder {
         return error / (double)testSet.size();
     }
 
+    public int getIterations() {
+        return trainer.getIterations();
+    }
 }

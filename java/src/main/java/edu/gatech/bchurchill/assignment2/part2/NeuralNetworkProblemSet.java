@@ -1,6 +1,7 @@
 package edu.gatech.bchurchill.assignment2.part2;
 
 import edu.gatech.bchurchill.assignment2.BaseProblemSet;
+import edu.gatech.bchurchill.assignment2.ConvergenceIterationTrainer;
 import edu.gatech.bchurchill.assignment2.SolutionStatistics;
 import func.nn.activation.DifferentiableActivationFunction;
 import func.nn.feedfwd.FeedForwardNetwork;
@@ -86,7 +87,7 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
         long trainTime = System.currentTimeMillis() - startTime;
 
         double testError = calculateTestError(network);
-        return new SolutionStatistics(null, trainTime, iterations, testError);
+        return new SolutionStatistics(null, trainTime, builder.getIterations(), testError);
     }
 
     private double calculateTestError(FeedForwardNetwork network) {
