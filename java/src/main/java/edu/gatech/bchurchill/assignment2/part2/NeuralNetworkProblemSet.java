@@ -49,8 +49,8 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics simulatedAnnealing() {
-        var initialTemperature = 1E25;
-        var temperatureDecay = 0.975;
+        var initialTemperature = 1E5;
+        var temperatureDecay = 0.99999;
         var network = baseBuilder()
                 .withAlgorithm(problem -> new SimulatedAnnealing(initialTemperature, temperatureDecay, problem));
 
@@ -59,9 +59,9 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
-        var populationSize = 200;
-        var populationToMate = 100;
-        var populationToMutate = 10;
+        var populationSize = 1000;
+        int populationToMate = (int)(populationSize * 0.85);
+        int populationToMutate = (int)(populationSize * 0.25);
         var network = baseBuilder()
                 .withAlgorithm(problem -> new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem));
 

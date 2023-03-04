@@ -34,7 +34,9 @@ public class ConvergenceIterationTrainer implements Trainer {
                 duplicateScoreCount = 0;
             }
 
-            //System.out.println(String.format("Iteration %d | score: %f", iterations, score));
+            if(iterations % 500 == 0) {
+                System.out.println(String.format("Iteration %d | score: %f", iterations, score));
+            }
 
         } while(stoppingConditionNotMet(duplicateScoreCount));
 
