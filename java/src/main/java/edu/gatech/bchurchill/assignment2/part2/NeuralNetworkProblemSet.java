@@ -61,12 +61,12 @@ public class NeuralNetworkProblemSet extends BaseProblemSet {
 
     @Override
     public SolutionStatistics geneticAlgorithm() {
-        var populationSize = 50;
+        var populationSize = 150;
         int populationToMate = (int)(populationSize * 0.50);
-        int populationToMutate = (int)(populationSize * 0.10);
+        int populationToMutate = (int)(populationSize * 0.90);
         var network = baseBuilder()
                 .withAlgorithm(problem -> new StandardGeneticAlgorithm(populationSize, populationToMate, populationToMutate, problem))
-                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 2, iterations, 0.0));
+                .withTrainer(algorithm -> new ConvergenceIterationTrainer(algorithm, 200, 200, 0.0000005));
 
         return solve(network);
     }
